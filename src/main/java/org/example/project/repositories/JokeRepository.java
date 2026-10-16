@@ -11,5 +11,8 @@ public interface JokeRepository {
     List<Joke> findByCategory(String category);
     boolean deleteById(int id);
     boolean updatePunchline(int id, String punchline);
+    List<Joke> findByRating(int rating);
+    List<Joke> findByAge(int age_appropriateness);
+    Optional<Joke> average_rating(int rating);
     Joke save(Joke joke);
 }

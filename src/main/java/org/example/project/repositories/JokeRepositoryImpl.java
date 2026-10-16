@@ -43,12 +43,49 @@ public class JokeRepositoryImpl implements JokeRepository {
     }
 
     @Override
+    public List<Joke> findByAge(int age_appropriateness) {
+        return jdbcClient.sql("""
+            SELECT *
+            FROM jokes
+            WHERE age_appropriateness = ?
+        """).param("age_appropriateness", age_appropriateness).query(jokeRowMapper).list();
+    }
+
+    @Override
+    public List<Joke> findByRating(int rating) {
+        return jdbcClient.sql("""
+        SELECT *
+        FROM jokes
+        WHERE rating = ?
+""").param("rating", rating).query(jokeRowMapper).list();
+    }
+
+    @Override
+    public Optional<Joke> average_rating(int rating) {
+        return jdbcClient.sql("""
+        SELECT AVG(rating) FROM jokes
+""").param("rating", rating).query(jokeRowMapper).optional();
+    }
+
+    @Override
     public boolean deleteById(int id) {
 
         int rowsAffected = jdbcClient.sql("""
                 DELETE FROM jokes
                 WHERE id = :id
 """).param("id", id).update();
+
+        return rowsAffected > 0;
+    }
+
+    @Override
+    public boolean updatePunchline(int id, String punchline) {
+
+        int rowsAffected = jdbcClient.sql("""
+            UPDATE jokes
+            SET punchline = :punchline
+            WHERE id = :id
+        """).param("punchline", punchline).param("id", id).update();
 
         return rowsAffected > 0;
     }
@@ -66,7 +103,7 @@ public class JokeRepositoryImpl implements JokeRepository {
         Number generatedId = keyHolder.getKey();
 
         if (generatedId == null) {
-            throw new IllegalStateException("Database did not generate an id")
+            throw new IllegalStateException("Database did not generate an id");
         }
 
         joke.setId(generatedId.intValue());
