@@ -6,10 +6,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class JokeRepositoryImpl implements JokeRepository {
 
     private final JdbcClient jdbcClient;
@@ -26,7 +28,7 @@ public class JokeRepositoryImpl implements JokeRepository {
 
     public Optional<Joke> findById(int id) {
         return jdbcClient
-                .sql("Select * FROM jokes where id = ?")
+                .sql("Select * FROM jokes where id = :id")
                 .param("id", id)
                 .query(jokeRowMapper)
                 .optional();
@@ -47,7 +49,7 @@ public class JokeRepositoryImpl implements JokeRepository {
         return jdbcClient.sql("""
             SELECT *
             FROM jokes
-            WHERE age_appropriateness = ?
+            WHERE age_appropriateness = :age_appropriateness
         """).param("age_appropriateness", age_appropriateness).query(jokeRowMapper).list();
     }
 
@@ -56,15 +58,14 @@ public class JokeRepositoryImpl implements JokeRepository {
         return jdbcClient.sql("""
         SELECT *
         FROM jokes
-        WHERE rating = ?
+        WHERE rating = :rating
 """).param("rating", rating).query(jokeRowMapper).list();
     }
 
-    @Override
-    public Optional<Joke> average_rating(int rating) {
+    public Optional<Joke> average_rating() {
         return jdbcClient.sql("""
         SELECT AVG(rating) FROM jokes
-""").param("rating", rating).query(jokeRowMapper).optional();
+""").query(jokeRowMapper).optional();
     }
 
     @Override
