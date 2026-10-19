@@ -39,5 +39,8 @@ public class Demo implements CommandLineRunner {
 
         System.out.println("\n--- DELETE NON_EXISTING ID ---");
         System.out.println(jokeRepository.deleteById(999));
+
+        System.out.println("\n--- Average rating ---");
+        System.out.println(jokeRepository.average_rating());
     }
 }

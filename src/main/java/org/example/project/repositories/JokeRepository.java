@@ -13,6 +13,6 @@ public interface JokeRepository {
     boolean updatePunchline(int id, String punchline);
     List<Joke> findByRating(int rating);
     List<Joke> findByAge(int age_appropriateness);
-    Optional<Joke> average_rating();
+    Optional<Double> average_rating();
     Joke save(Joke joke);
 }

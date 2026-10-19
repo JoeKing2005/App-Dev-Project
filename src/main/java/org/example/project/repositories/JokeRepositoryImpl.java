@@ -62,10 +62,10 @@ public class JokeRepositoryImpl implements JokeRepository {
 """).param("rating", rating).query(jokeRowMapper).list();
     }
 
-    public Optional<Joke> average_rating() {
+    public Optional<Double> average_rating() {
         return jdbcClient.sql("""
         SELECT AVG(rating) FROM jokes
-""").query(jokeRowMapper).optional();
+""").query(Double.class).optional();
     }
 
     @Override

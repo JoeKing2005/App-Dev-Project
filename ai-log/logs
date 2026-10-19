@@ -1,0 +1,22 @@
+16-10-2026 | Tool: ChatGPT
+
+Prompt:
+"is there a .aggregate sql function i can use kind of like .count so i can get the aggregate of a certain field"
+
+AI contribution:
+Told me about a plethora of sql functions that can be used to add a field
+
+What I did:
+Used the average function to calculate the average rating of the ratings
+
+16-10-206 | Tool: ChatGPT
+
+Prompt:
+"Database "mem:testdb" not found, either pre-create it or allow remote database creation (not recommended in secure environments) [90149-240] 90149/90149 (Help)"
+
+AI contribution:
+Told me to keep spring.sql.init.mode=never in application.properties
+
+What I did:
+Added spring.sql.init.mode=never into application.properties
+
