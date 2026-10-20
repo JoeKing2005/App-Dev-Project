@@ -18,14 +18,14 @@ public class Joke {
     private String setup;
     private String punchline;
     private String category;
-    private int age_appropriateness;
+    private int ageAppropriateness;
     private int rating;
 
     public Joke(String setup, String punchline, String category, int age_appropriateness, int rating) {
         this.setup = setup;
         this.punchline = punchline;
         this.category = category;
-        this.age_appropriateness = age_appropriateness;
+        this.ageAppropriateness = age_appropriateness;
         this.rating = rating;
     }
 

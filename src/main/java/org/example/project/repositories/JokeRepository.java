@@ -1,18 +1,23 @@
 package org.example.project.repositories;
 
 import org.example.project.entities.Joke;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface JokeRepository {
-    List<Joke> findAll();
-    Optional<Joke> findById(int id);
+public interface JokeRepository extends JpaRepository<Joke, Integer> {
     List<Joke> findByCategory(String category);
-    boolean deleteById(int id);
-    boolean updatePunchline(int id, String punchline);
     List<Joke> findByRating(int rating);
-    List<Joke> findByAge(int age_appropriateness);
-    Optional<Double> average_rating();
-    Joke save(Joke joke);
+    List<Joke> findByAgeAppropriatenessBefore(int age);
+    @Modifying
+    @Query(value = "delete Joke x where x.ageAppropriateness=:age")
+    int deleteJokesByAge(int age);
+    @Query("""
+        SELECT AVG(j.rating)
+        FROM Joke j
+        """)
+    Double averageRating();
 }
