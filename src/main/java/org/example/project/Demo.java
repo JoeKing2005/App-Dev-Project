@@ -35,5 +35,10 @@ public class Demo implements CommandLineRunner {
 
         System.out.println("\n--- Average rating ---");
         System.out.println(jokeRepository.averageRating());
+
+        jokeRepository.findALlProjectedBy().forEach(joke -> {
+            System.out.println("Setup: " + joke.setup());
+            System.out.println("Punchline: " + joke.punchline());
+        });
     }
 }
