@@ -37,4 +37,5 @@ public interface JokeRepository extends JpaRepository<Joke, Integer> {
     boolean existsBySetupAndPunchline(String setup, String punchline);
 
     List<Joke> findByAgeAppropriatenessBefore(int i);
+    List<Joke> findByLanguage(String language);
 }

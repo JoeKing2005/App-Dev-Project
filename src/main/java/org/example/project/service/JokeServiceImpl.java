@@ -8,6 +8,7 @@ import org.example.project.repositories.JokeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @AllArgsConstructor
@@ -72,4 +73,36 @@ public class JokeServiceImpl implements JokeService{
     public Double averageRating() {
         return jokeRepository.averageRating();
     }
+
+    @Override
+    public List<Joke> findByLanguage(String language) {
+        if (language == null || language.isBlank()) {
+            throw new IllegalArgumentException("Language can't be blank");
+        }
+
+        return jokeRepository.findByLanguage(
+                language.trim().toLowerCase(Locale.ROOT)
+        );
+    }
+
+    @Override
+    @Transactional
+    public Joke addJoke(Joke joke) {
+        if (joke == null) {
+            throw new IllegalArgumentException("Joke must not be null");
+        }
+
+        if (joke.getRating() < 1 || joke.getRating() > 5) {
+            throw new IllegalArgumentException("Rating must be between 1 and 5");
+        }
+
+        if (jokeRepository.existsBySetupAndPunchline(
+                joke.getSetup(), joke.getPunchline()
+        )) {
+            throw new IllegalArgumentException("This joke already exists");
+        }
+
+        return jokeRepository.save(joke);
+    }
+
 }

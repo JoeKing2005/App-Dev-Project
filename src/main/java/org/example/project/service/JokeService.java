@@ -15,4 +15,6 @@ public interface JokeService {
     List<Joke> findByAge(int age);
     List<Joke> findByMinimumRating(int rating);
     Double averageRating();
+    List<Joke> findByLanguage(String language);
+    Joke addJoke(Joke joke);
 }
