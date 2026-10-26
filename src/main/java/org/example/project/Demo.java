@@ -30,7 +30,7 @@ public class Demo implements CommandLineRunner {
         System.out.println(jokeRepository.findByAgeAppropriatenessBefore(12));
 
         System.out.println("\n--- FIND BY RATING ---");
-        System.out.println(jokeRepository.findByRating(2));
+        System.out.println(jokeRepository.findByRatingGreaterThanEqual(2));
 
 
         System.out.println("\n--- Average rating ---");

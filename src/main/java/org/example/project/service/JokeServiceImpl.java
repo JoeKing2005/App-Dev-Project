@@ -2,6 +2,7 @@ package org.example.project.service;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.example.project.dto.JokeResponse;
 import org.example.project.entities.Joke;
 import org.example.project.repositories.JokeRepository;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,30 @@ public class JokeServiceImpl implements JokeService{
         Joke joke = findById(id);
         joke.setRating(rating);
         return joke;
+    }
+
+    @Override
+    public List<JokeResponse> findAllSetupsAndPunchlines() {
+        return jokeRepository.findALlProjectedBy();
+    }
+
+    @Override
+    public List<Joke> findByCategory(String category) {
+        return jokeRepository.findByCategory(category);
+    }
+
+    @Override
+    public List<Joke> findByAge(int age) {
+        return jokeRepository.findByAgeAppropriatenessLessThanEqual(age);
+    }
+
+    @Override
+    public List<Joke> findByMinimumRating(int rating) {
+        return jokeRepository.findByRatingGreaterThanEqual(rating);
+    }
+
+    @Override
+    public Double averageRating() {
+        return jokeRepository.averageRating();
     }
 }

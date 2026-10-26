@@ -26,6 +26,15 @@ public interface JokeRepository extends JpaRepository<Joke, Integer> {
         FROM Joke j
             """)
     List<JokeResponse> findALlProjectedBy();
+    
+    @Modifying
+    @Query("DELETE FROM Joke j WHERE j.category = :category")
+    int deleteJokeByCategory(
+            @org.springframework.data.repository.query.Param("category")
+            String category
+    );
 
     boolean existsBySetupAndPunchline(String setup, String punchline);
+
+    List<Joke> findByAgeAppropriatenessBefore(int i);
 }
