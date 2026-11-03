@@ -7,8 +7,6 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 @Entity
 @Table(name = "jokes")
 public class Joke {
@@ -21,14 +19,18 @@ public class Joke {
     private int ageAppropriateness;
     private int rating;
     private String language = "en";
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private AppUser user;
 
-    public Joke(String setup, String punchline, String category, int age_appropriateness, int rating, String language) {
+    public Joke(String setup, String punchline, String category, int age_appropriateness, int rating, String language, AppUser user) {
         this.setup = setup;
         this.punchline = punchline;
         this.category = category;
         this.ageAppropriateness = age_appropriateness;
         this.rating = rating;
         this.language = language;
+        this.user = user;
     }
 
 

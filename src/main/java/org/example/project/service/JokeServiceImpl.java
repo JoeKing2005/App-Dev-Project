@@ -3,7 +3,9 @@ package org.example.project.service;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.example.project.dto.JokeResponse;
+import org.example.project.entities.AppUser;
 import org.example.project.entities.Joke;
+import org.example.project.repositories.AppUserRepository;
 import org.example.project.repositories.JokeRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,10 @@ import java.util.Locale;
 
 @Service
 @AllArgsConstructor
-@Transactional
 public class JokeServiceImpl implements JokeService{
 
     private JokeRepository jokeRepository;
+    private AppUserRepository appUserRepository;
 
     @Override
     public List<Joke> findAll() {
@@ -87,11 +89,15 @@ public class JokeServiceImpl implements JokeService{
 
     @Override
     @Transactional
-    public Joke addJoke(Joke joke) {
+    public Joke addJoke(Joke joke, int userId) {
         if (joke == null) {
             throw new IllegalArgumentException("Joke must not be null");
         }
 
+        AppUser user = appUserRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException(
+                   "AppUser with ID " + userId + "does not exist"
+                ));
         if (joke.getRating() < 1 || joke.getRating() > 5) {
             throw new IllegalArgumentException("Rating must be between 1 and 5");
         }
@@ -101,6 +107,8 @@ public class JokeServiceImpl implements JokeService{
         )) {
             throw new IllegalArgumentException("This joke already exists");
         }
+
+        joke.setUser(user);
 
         return jokeRepository.save(joke);
     }
