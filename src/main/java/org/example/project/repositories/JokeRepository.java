@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.example.project.dto.JokeResponse;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +36,12 @@ public interface JokeRepository extends JpaRepository<Joke, Integer> {
             String category
     );
 
+    List<Joke> findByUser_UserId(int userId);
+
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query("DELETE from Joke j WHERE j.user.userId = :userId")
+    int deleteAllByUserId(@Param("userId") Integer userId);
+    List<JokeResponse> findByRatingGreaterThanEqualAndAgeAppropriatenessLessThanEqual(int rating, int age);
     boolean existsBySetupAndPunchline(String setup, String punchline);
 
     List<Joke> findByAgeAppropriatenessBefore(int i);
