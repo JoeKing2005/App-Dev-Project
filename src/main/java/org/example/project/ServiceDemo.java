@@ -36,7 +36,7 @@ public class ServiceDemo implements CommandLineRunner {
                 "Because he didn't get arrays.",
                 4,
                 "en"
-        ));
+        ), 2);
         System.out.println("Added: " + saved);
 
         System.out.println("\n--- DUPLICATE JOKE ---");
@@ -46,7 +46,7 @@ public class ServiceDemo implements CommandLineRunner {
                     "Because he didn't get arrays.",
                     4,
                     "en"
-            ));
+            ), 1);
             System.out.println("FAIL: duplicate was accepted");
         } catch (IllegalArgumentException ex) {
             System.out.println("Duplicate rejected: " + ex.getMessage());
@@ -59,7 +59,7 @@ public class ServiceDemo implements CommandLineRunner {
                     "This should not be saved.",
                     9,
                     "en"
-            ));
+            ), 1);
             System.out.println("FAIL: invalid joke was accepted");
         } catch (IllegalArgumentException ex) {
             System.out.println("Invalid joke rejected: " + ex.getMessage());

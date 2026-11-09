@@ -12,13 +12,17 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Data
+@Table(name = "app_users")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int userId;
     @Column(unique = true)
     private String email;
+    @Column(name = "firstname")
     private String firstName;
+    @Column(name = "lastname")
     private String lastName;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
