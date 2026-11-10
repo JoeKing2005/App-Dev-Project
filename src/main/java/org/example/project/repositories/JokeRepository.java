@@ -24,7 +24,7 @@ public interface JokeRepository extends JpaRepository<Joke, Integer> {
     Double averageRating();
 
     @Query("""
-        SELECT new org.example.project.dto.JokeResponse(j.setup, j.punchline)
+        SELECT new org.example.project.dto.JokeResponse(j.id, j.setup, j.punchline)
         FROM Joke j
             """)
     List<JokeResponse> findALlProjectedBy();
