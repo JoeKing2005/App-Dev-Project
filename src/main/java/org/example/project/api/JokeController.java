@@ -17,18 +17,18 @@ public class JokeController {
     private JokeService jokeService;
 
     @GetMapping("/{id}")
-    JokeResponse getJoke(@PathVariable int id) {
+    public JokeResponse getJoke(@PathVariable int id) {
         return JokeResponse.toJokeResponse(jokeService.findById(id));
     }
 
     @GetMapping
-    public List<Joke> getJokes() {
-        return jokeService.findAll();
+    public List<JokeResponse> getJokes() {
+        return jokeService.findAll().stream().map(JokeResponse::toJokeResponse).toList();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deleteJoke(@PathVariable int id) {
+    public void deleteJoke(@PathVariable int id) {
         jokeService.deleteById(id);
     }
 
@@ -38,22 +38,22 @@ public class JokeController {
     }
 
     @GetMapping("/category")
-    public List<Joke> getJokesByCategory(@RequestParam String category) {
-        return jokeService.findByCategory(category);
+    public List<JokeResponse> getJokesByCategory(@RequestParam String category) {
+        return jokeService.findByCategory(category).stream().map(JokeResponse::toJokeResponse).toList();
     }
 
     @GetMapping("/age")
-    public List<Joke> getJokesByAge(@RequestParam int age) {
-        return jokeService.findByAge(age);
+    public List<JokeResponse> getJokesByAge(@RequestParam int age) {
+        return jokeService.findByAge(age).stream().map(JokeResponse::toJokeResponse).toList();
     }
 
     @GetMapping("/rating")
-    public List<Joke> getJokesByRating(@RequestParam int rating) {
-        return jokeService.findByMinimumRating(rating);
+    public List<JokeResponse> getJokesByRating(@RequestParam int rating) {
+        return jokeService.findByMinimumRating(rating).stream().map(JokeResponse::toJokeResponse).toList();
     }
 
     @GetMapping("/language")
-    public List<Joke> getJokesByLanguage(@RequestParam String language) {
-        return jokeService.findByLanguage(language);
+    public List<JokeResponse> getJokesByLanguage(@RequestParam String language) {
+        return jokeService.findByLanguage(language).stream().map(JokeResponse::toJokeResponse).toList();
     }
 }
