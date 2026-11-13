@@ -2,6 +2,7 @@ package org.example.project.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.project.dto.AppUserDetailsResponse;
 import org.example.project.dto.AppUserResponse;
 import org.example.project.entities.AppUser;
 import org.example.project.entities.Joke;
@@ -19,16 +20,13 @@ public class AppUserServiceImpl implements AppUserService{
     private final JokeRepository jokeRepository;
 
     @Override
-    public List<AppUserResponse> findAll() {
-        return appUserRepository.findAllUsers();
+    public List<AppUserDetailsResponse> findAll() {
+        return appUserRepository.findAll().stream().map(this::toDetails).toList();
     };
 
     @Override
-    public AppUserResponse findById(int id) {
-        return appUserRepository.findUserResponseById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "User with ID " + id + "was not found"
-                ));
+    public AppUserDetailsResponse findById(int id) {
+        return toDetails(requireUser(id));
     }
 
     private AppUser requireUser(int id) {
@@ -36,6 +34,10 @@ public class AppUserServiceImpl implements AppUserService{
                 .orElseThrow(() -> new IllegalArgumentException(
                         "User with ID " + id + "was not found"
                 ));
+    }
+
+    public List<AppUserResponse> findAllSummaries() {
+        return appUserRepository.findAllUsers();
     }
 
     @Override
@@ -51,6 +53,15 @@ public class AppUserServiceImpl implements AppUserService{
 
         jokeRepository.deleteAllByUserId(id);
         appUserRepository.deleteById(id);
+    }
+
+    private AppUserDetailsResponse toDetails(AppUser user) {
+        return new AppUserDetailsResponse(
+                user.getUserId(),
+                user.getEmail(),
+                user.getFirstName(),
+                user.getLastName()
+        );
     }
 
 }
