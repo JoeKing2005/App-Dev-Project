@@ -1,5 +1,6 @@
 package org.example.project.repositories;
 
+import org.example.project.dto.JokeSummaryResponse;
 import org.example.project.entities.Joke;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -24,10 +25,10 @@ public interface JokeRepository extends JpaRepository<Joke, Integer> {
     Double averageRating();
 
     @Query("""
-        SELECT new org.example.project.dto.JokeResponse(j.id, j.setup, j.punchline)
+        SELECT new org.example.project.dto.JokeSummaryResponse(j.setup, j.punchline)
         FROM Joke j
             """)
-    List<JokeResponse> findALlProjectedBy();
+    List<JokeSummaryResponse> findALlProjectedBy();
     
     @Modifying
     @Query("DELETE FROM Joke j WHERE j.category = :category")

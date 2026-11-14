@@ -21,6 +21,7 @@ public class AppUserController {
     public AppUserDetailsResponse getUser(@PathVariable int id) { return appUserService.findById(id);
     }
 
+    @GetMapping
     public List<AppUserDetailsResponse> getUsers() {
         return appUserService.findAll();
     }

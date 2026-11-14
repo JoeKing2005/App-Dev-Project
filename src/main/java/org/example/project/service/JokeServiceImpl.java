@@ -3,6 +3,7 @@ package org.example.project.service;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.example.project.dto.JokeResponse;
+import org.example.project.dto.JokeSummaryResponse;
 import org.example.project.entities.AppUser;
 import org.example.project.entities.Joke;
 import org.example.project.repositories.AppUserRepository;
@@ -52,7 +53,7 @@ public class JokeServiceImpl implements JokeService{
     }
 
     @Override
-    public List<JokeResponse> findAllSetupsAndPunchlines() {
+    public List<JokeSummaryResponse> findAllSetupsAndPunchlines() {
         return jokeRepository.findALlProjectedBy();
     }
 

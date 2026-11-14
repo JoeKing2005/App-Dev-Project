@@ -2,6 +2,7 @@ package org.example.project.api;
 
 import lombok.AllArgsConstructor;
 import org.example.project.dto.JokeResponse;
+import org.example.project.dto.JokeSummaryResponse;
 import org.example.project.entities.Joke;
 import org.example.project.service.JokeService;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class JokeController {
     }
 
     @GetMapping("/summary")
-    public List<JokeResponse> get_setups_punchlines() {
+    public List<JokeSummaryResponse> get_setups_punchlines() {
         return jokeService.findAllSetupsAndPunchlines();
     }
 
