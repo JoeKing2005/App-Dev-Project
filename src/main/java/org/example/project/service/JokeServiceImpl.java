@@ -100,13 +100,13 @@ public class JokeServiceImpl implements JokeService{
                    "AppUser with ID " + userId + "does not exist"
                 ));
         if (joke.getRating() < 1 || joke.getRating() > 5) {
-            throw new IllegalArgumentException("Rating must be between 1 and 5");
+            throw new BusinessRuleException("Rating must be between 1 and 5");
         }
 
         if (jokeRepository.existsBySetupAndPunchline(
                 joke.getSetup(), joke.getPunchline()
         )) {
-            throw new IllegalArgumentException("This joke already exists");
+            throw new DuplicateJokeException("This joke already exists");
         }
 
         joke.setUser(user);

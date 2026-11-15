@@ -2,6 +2,8 @@ package org.example.project;
 
 import lombok.AllArgsConstructor;
 import org.example.project.entities.Joke;
+import org.example.project.service.BusinessRuleException;
+import org.example.project.service.DuplicateJokeException;
 import org.example.project.service.JokeNotFoundException;
 import org.example.project.service.JokeService;
 import org.springframework.boot.CommandLineRunner;
@@ -48,7 +50,7 @@ public class ServiceDemo implements CommandLineRunner {
                     "en"
             ), 1);
             System.out.println("FAIL: duplicate was accepted");
-        } catch (IllegalArgumentException ex) {
+        } catch (DuplicateJokeException ex) {
             System.out.println("Duplicate rejected: " + ex.getMessage());
         }
 
@@ -61,7 +63,7 @@ public class ServiceDemo implements CommandLineRunner {
                     "en"
             ), 1);
             System.out.println("FAIL: invalid joke was accepted");
-        } catch (IllegalArgumentException ex) {
+        } catch (BusinessRuleException ex) {
             System.out.println("Invalid joke rejected: " + ex.getMessage());
         }
 

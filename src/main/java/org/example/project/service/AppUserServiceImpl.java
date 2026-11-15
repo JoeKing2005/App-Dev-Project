@@ -31,7 +31,7 @@ public class AppUserServiceImpl implements AppUserService{
 
     private AppUser requireUser(int id) {
         return appUserRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
+                .orElseThrow(() -> new AppUserNotFoundException(
                         "User with ID " + id + "was not found"
                 ));
     }
