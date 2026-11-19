@@ -1,8 +1,11 @@
 package org.example.project.api;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.project.dto.JokeResponse;
 import org.example.project.dto.JokeSummaryResponse;
+import org.example.project.dto.NewJokeResponse;
+import org.example.project.dto.UpdateRatingResponse;
 import org.example.project.entities.Joke;
 import org.example.project.service.JokeService;
 import org.springframework.http.HttpStatus;
@@ -56,5 +59,28 @@ public class JokeController {
     @GetMapping("/language")
     public List<JokeResponse> getJokesByLanguage(@RequestParam String language) {
         return jokeService.findByLanguage(language).stream().map(JokeResponse::toJokeResponse).toList();
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public JokeResponse addJoke(@Valid @RequestBody NewJokeResponse request) {
+        Joke joke = new Joke();
+        joke.setSetup(request.setup());
+        joke.setPunchline(request.punchline());
+        joke.setCategory(request.category());
+        joke.setAgeAppropriateness(request.ageAppropriateness());
+        joke.setRating(request.rating());
+        joke.setLanguage(request.language());
+
+        Joke saved = jokeService.addJoke(joke, request.userId());
+
+        return JokeResponse.toJokeResponse(saved);
+    }
+
+    @PatchMapping("/{id}/rating")
+    public JokeResponse updateRating(@PathVariable int id, @Valid @RequestBody UpdateRatingResponse request) {
+        Joke updated = jokeService.updateRating(id, request.rating());
+
+        return JokeResponse.toJokeResponse(updated);
     }
 }
