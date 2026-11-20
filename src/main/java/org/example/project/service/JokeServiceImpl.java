@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -19,6 +20,7 @@ public class JokeServiceImpl implements JokeService{
 
     private JokeRepository jokeRepository;
     private AppUserRepository appUserRepository;
+    private static final Set<String> ValidCategories = Set.of("DAD", "SCIENCE", "CODING");
 
     @Override
     public List<Joke> findAll() {
@@ -101,6 +103,14 @@ public class JokeServiceImpl implements JokeService{
                 ));
         if (joke.getRating() < 1 || joke.getRating() > 5) {
             throw new BusinessRuleException("Rating must be between 1 and 5");
+        }
+
+        if (joke.getCategory() == null || !ValidCategories.contains(joke.getCategory())) {
+            throw new BusinessRuleException("Category must be DAD, SCIENCE or CODING");
+        }
+
+        if (jokeRepository.existsBySetupAndPunchline(joke.getSetup(), joke.getPunchline())) {
+            throw new DuplicateJokeException("A joke with this setup and punchline already exists");
         }
 
         if (jokeRepository.existsBySetupAndPunchline(

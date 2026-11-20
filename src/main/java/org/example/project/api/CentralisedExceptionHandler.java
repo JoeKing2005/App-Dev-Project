@@ -18,6 +18,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class CentralisedExceptionHandler {
@@ -91,5 +92,19 @@ public class CentralisedExceptionHandler {
             HttpServletRequest request
     ) {
         return createResponse(e.getMessage(), "404", request);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleValidation(
+            MethodArgumentNotValidException ex, HttpServletRequest request
+    ) {
+        var error = ex.getBindingResult().getFieldError();
+        String message = "Invalid request";
+        if (error != null){
+            message = error.getField() + ": " + error.getDefaultMessage();
+        }
+
+        return createResponse(message, "400", request);
     }
 }
