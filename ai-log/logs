@@ -9,7 +9,7 @@ Told me about a plethora of sql functions that can be used to add a field
 What I did:
 Used the average function to calculate the average rating of the ratings
 
-16-10-206 | Tool: ChatGPT
+16-10-2026 | Tool: ChatGPT
 
 Prompt:
 "Database "mem:testdb" not found, either pre-create it or allow remote database creation (not recommended in secure environments) [90149-240] 90149/90149 (Help)"
@@ -20,3 +20,122 @@ Told me to keep spring.sql.init.mode=never in application.properties
 What I did:
 Added spring.sql.init.mode=never into application.properties
 
+26-10-2026 | Tool: ChatGPT
+
+Prompt:
+"Should i use joke or jokeresponse for my findAllSetupsAndPunchlines method in my jokeServiceImpl"
+
+AI Contribution:
+Told me to use jokereponse as its a dto and it would allow me to remove the fluff of returning joke
+
+What i did:
+used jokeResponse for my findallsetupsand punchlines method
+
+26-10-2026 | Tool: ChatGPT
+
+Prompt:
+"Query did not return a unique result: 3 results were returned how do i fix this error"
+
+AI Contribution:
+Told me the error was due to my findbyAgeAppropriatenessBefore() method expected one joke but three jokes matched
+
+What I did:
+Made it return List<Joke> instead
+
+26-10-2026 | Tool: ChatGPT
+
+Prompt:
+"Can you give me a spanish joke with a setup and punchline"
+
+AI contribution:
+Gave me a spanish joke with a setup and punchline
+
+What I did:
+Used the joke it gave me
+
+26-10-2026 | Tool: ChatGPT
+
+Prompt:
+"Why am i getting an error (gave it the error logs)"
+
+AI contribution:
+Told me the error was due to me only having 5 columns in the insert names but the spanish row had six values
+
+What I did:
+Added language to the column list and en to every english row
+
+03-11-2026 | Tool: ChatGPT
+
+Prompt:
+"Cannot resolve method 'setAppUser' in 'Joke'"
+
+AI contribution:
+You need to add an appUser field in the Joke class
+
+What I did:
+Added the appUser field to the Joke class
+
+06-11-2026 | Tool: ChatGPT
+
+Prompt:
+"What should i put in my AppUserResponse DTO"
+
+AI contribution:
+Told me to add id email firstname and lastname
+
+What i did:
+Added id email firstname and lastname into my DTO
+
+06-11-2026 | Tool: ChatGPT
+
+Prompt:
+"Required type:
+ AppUserResponse
+
+ Provided:
+ Optional
+ <org.example.project.dto.AppUserResponse> how do i fix this"
+
+AI contribution:
+Told me to throw an exception if the user doesn't exist
+
+What i did:
+Changed it so that an exception is thrown if the user doesn't exist
+
+09-11-2026 | Tool: ChatGPT
+
+Prompt:
+"C:\Users\dell\.jdks\openjdk-26.0.2.1\bin\java.exe -XX:TieredStopAtLevel=1 -Dspring.output.ansi.enabled=always "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2026.2.2\lib\idea_rt.jar=58775" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath "C:\Users\dell\Documents\College Stuff\4th Year\App Development Frameworks\Project\target\test-classes;C:\Users\dell\Documents\College Stuff\4th Year\App Development Frameworks\Project\target\classes" org.example.project.ProjectApplication
+ Error: Could not find or load main class org.example.project.ProjectApplication
+ Caused by: java.lang.ClassNotFoundException: org.example.project.ProjectApplication
+
+ Process finished with exit code 1
+  i got this after i tried to run"
+
+AI contribution:
+Told me to reload maven and rebuild my project
+
+What i did:
+reloaded maven and rebuilt my project
+
+09-11-2026 | Tool: ChatGPT
+
+Prompt:
+"Can you help me convert my controller to work with dtos instead of the entire object"
+
+AI contribution:
+Showed me how to convert my methods to return dtos instead of the object
+
+What i did:
+Integrated the change it gave me
+
+10-11-2026 | Tool: ChatGPT
+
+Prompt:
+"How do I add a userResponse section in my jokeResponse DTO"
+
+AI Contribution:
+Showed me what fields to add to have a userResponse in my jokeresponse
+
+What i did:
+added those fields to my jokeResponse

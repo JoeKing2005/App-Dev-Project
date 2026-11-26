@@ -25,7 +25,7 @@ public class AppUser {
     @Column(name = "lastname")
     private String lastName;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user")
     private List<Joke> jokes = new ArrayList<>();
 
     public AppUser(String email, String firstName, String lastName) {
