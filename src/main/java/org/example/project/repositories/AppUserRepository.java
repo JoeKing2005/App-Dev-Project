@@ -32,4 +32,6 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
         """)
     Optional<AppUserResponse> findUserResponseById(@Param("id") int id);
 
+    Optional<AppUser> findByEmail(String email);
+
 }

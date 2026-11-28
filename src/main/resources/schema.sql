@@ -2,7 +2,10 @@ CREATE TABLE app_users (
    id INT PRIMARY KEY AUTO_INCREMENT,
    email VARCHAR(255) NOT NULL UNIQUE,
    firstname VARCHAR(255),
-   lastname VARCHAR(255)
+   lastname VARCHAR(255),
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL CHECK ( role in ('WRITER', 'ADMIN')),
+    locked BOOLEAN DEFAULT TRUE NOT NULL
 );
 
 CREATE TABLE jokes (

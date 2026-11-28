@@ -1,6 +1,7 @@
-INSERT INTO app_users (email, firstname, lastname)
-VALUES ('joseph@example.com', 'Joseph', 'King'),
-       ('alex@example.com', 'Alex', 'Smith');
+INSERT INTO app_users (email, firstname, lastname, password, role, locked)
+VALUES ('joseph@example.com', 'Joseph', 'King', '$2a$10$v/UQ80UiUnShhnd54R8q2exmA0YGs7HMXjHFWUMTdDbLZsZM0D38G', 'WRITER', FALSE),
+       ('alex@example.com', 'Alex', 'Smith', '$2a$10$v/UQ80UiUnShhnd54R8q2exmA0YGs7HMXjHFWUMTdDbLZsZM0D38G', 'ADMIN', FALSE),
+       ('daniel@example.com', 'Daniel', 'Soden', '$2a$10$v/UQ80UiUnShhnd54R8q2exmA0YGs7HMXjHFWUMTdDbLZsZM0D38G', 'WRITER', TRUE);
 INSERT INTO jokes (setup, punchline, category, age_appropriateness, rating, language, user_id)
 VALUES ('Why don''t skeletons fight each other?', 'They don''t have the guts.', 'DAD', 12, 3, 'en',2),
        ('Why did the scarecrow win an award?', 'Because he was outstanding in his field.', 'DAD', 6, 4, 'en',1),

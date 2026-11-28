@@ -24,6 +24,12 @@ public class AppUser {
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String role;
+    @Column(name = "locked", nullable = false)
+    private boolean Locked = false;
 
     @OneToMany(mappedBy = "user")
     private List<Joke> jokes = new ArrayList<>();

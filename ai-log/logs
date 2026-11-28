@@ -139,3 +139,14 @@ Showed me what fields to add to have a userResponse in my jokeresponse
 
 What i did:
 added those fields to my jokeResponse
+
+28-11-2026 | Tool: ChatGPT
+
+Prompt:
+"How do i check my hashed passwords so i can see the hash"
+
+AI Contribution:
+Told me to make a hash checker in my test file
+
+What i did:
+Made a hash checker in my test file
